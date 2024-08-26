@@ -16,5 +16,3 @@ def chat():
 
 if __name__ == "__main__":
     app.run()
-
-#Commit to test GH Actions
