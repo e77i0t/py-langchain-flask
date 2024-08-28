@@ -73,5 +73,5 @@ sudo mkdir -p /var/www/langchain-app/logs
 
 # Start Gunicorn with the Flask application, logging to a file
 echo "Starting Gunicorn"
-sudo /var/www/langchain-app/venv/bin/gunicorn --workers 3 --bind unix:myapp.sock server:app --user www-data --group www-data --daemon --log-file=/var/www/langchain-app/logs/gunicorn.log --error-log=/var/www/langchain-app/logs/gunicorn_error.log --capture-output --enable-stdio-inheritanc
-eecho "Started Gunicorn 🚀"
+sudo /var/www/langchain-app/venv/bin/gunicorn --workers 3 --bind unix:myapp.sock server:app --user www-data --group www-data --daemon --log-file=/var/www/langchain-app/logs/gunicorn.log --error-log=/var/www/langchain-app/logs/gunicorn_error.log --capture-output --enable-stdio-inheritance
+echo "Started Gunicorn 🚀"
