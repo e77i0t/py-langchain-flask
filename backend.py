@@ -9,7 +9,7 @@ load_dotenv()
 
 def domain_name_generator(niche):
     try:
-        llm = OpenAI()
+        llm = OpenAI(openai_api_key= os.environ['OPENAI_API_KEY'])
         output_parser = CommaSeparatedListOutputParser()
         format_instruction = output_parser.get_format_instructions()
 
