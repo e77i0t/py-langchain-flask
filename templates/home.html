@@ -22,20 +22,33 @@
         )}`;
 
         fetch(api)
-          .then((res) => {
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-          })
-          .then((data) => {
-            outputArea.innerHTML = "";
-            data.forEach((domain) => {
-              listItem = document.createElement("li");
-              listItem.innerHTML = domain;
-              outputArea.append(listItem);
-            });
-          });
+  .then((res) => {
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  })
+  .then((data) => {
+    try {
+      outputArea.innerHTML = "";
+      data.forEach((domain) => {
+        listItem = document.createElement("li");
+        listItem.innerHTML = domain;
+        outputArea.append(listItem);
+      });
+    } catch (error) {
+      console.error("Error parsing data:", error);
+      outputArea.innerHTML = "Error parsing data. Please try again.";
+    }
+  })
+  .catch((error) => {
+    console.error("Error fetching data:", error);
+    if (error.message.includes("HTTP error")) {
+      outputArea.innerHTML = `Error fetching data. HTTP error! status: ${error.message.split(":")[1].trim()}`;
+    } else {
+      outputArea.innerHTML = "Error fetching data. Please try again.";
+    }
+  });
       };
     </script>
 
