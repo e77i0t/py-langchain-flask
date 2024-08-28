@@ -69,5 +69,6 @@ sudo pkill gunicorn
 sudo rm -rf myapp.sock
 
 # Start Gunicorn with the Flask application
-echo "Starting Gunicorn"sudo /var/www/langchain-app/venv/bin/gunicorn --workers 3 --bind unix:myapp.sock server:app --user www-data --group www-data --daemon
+echo "Starting Gunicorn"
+sudo /var/www/langchain-app/venv/bin/gunicorn --workers 3 --bind unix:myapp.sock server:app --user www-data --group www-data --daemon
 echo "Started Gunicorn 🚀"
