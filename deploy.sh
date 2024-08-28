@@ -68,7 +68,10 @@ fi
 sudo pkill gunicorn
 sudo rm -rf myapp.sock
 
-# Start Gunicorn with the Flask application
+# Create logs directory
+sudo mkdir -p /var/www/langchain-app/logs
+
+# Start Gunicorn with the Flask application, logging to a file
 echo "Starting Gunicorn"
-sudo /var/www/langchain-app/venv/bin/gunicorn --workers 3 --bind unix:myapp.sock server:app --user www-data --group www-data --daemon
+sudo /var/www/langchain-app/venv/bin/gunicorn --workers 3 --bind unix:myapp.sock server:app --user www-data --group www-data --daemon --log-file=/var/www/langchain-app/logs/gunicorn.log --error-log=/var/www/langchain-app/logs/gunicorn_error.log
 echo "Started Gunicorn 🚀"
