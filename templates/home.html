@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My domain name generator</title>
-  </head>
-  <body>
-    <div id="container">
-      <input type="text" id="input" /> <br />
-      <button onclick="callLLM()">Generate Domain Names!!!</button>
-      <div id="output"></div>
-    </div>
-    <script>
-      const callLLM = () => {
-        const niche = document.getElementById("input").value;
-        const outputArea = document.getElementById("output");
-        outputArea.innerHTML = "Loading...";
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My domain name generator</title>
+</head>
+<body>
+<div id="container">
+<input type="text" id="input" /> <br />
+<button onclick="callLLM()">Generate Domain Names!!!</button>
+<div id="output"></div>
+</div>
+<script>
+const callLLM = () => {
+const niche = document.getElementById("input").value;
+const outputArea = document.getElementById("output");
+outputArea.innerHTML = "Loading...";
 
-        const api = `http://44.211.30.53/chat?input=${encodeURIComponent(
-          niche
-        )}`;
+const api = `http://54.204.64.160/chat?input=${encodeURIComponent(
+niche
+)}`;
 
-        fetch(api)
-          .then((res) => res.json())
-          .then((data) => {
-            outputArea.innerHTML = "";
-            data.forEach((domain) => {
-              listItem = document.createElement("li");
-              listItem.innerHTML = domain;
-              outputArea.append(listItem);
-            });
-          });
-      };
-    </script>
+fetch(api)
+.then((res) => {
+if (!res.ok) {
+throw new Error(`HTTP error! status: ${res.status}`);
+}
+return res.json();
+})
+.then((data) => {
+try {
+outputArea.innerHTML = "";
+data.forEach((domain) => {
+listItem = document.createElement("li");
+listItem.innerHTML = domain;
+outputArea.append(listItem);
+});
+} catch (error) {
+console.error("Error parsing data:", error);
+outputArea.innerHTML = "Error parsing data. Please try again.";
+}
+})
+.catch((error) => {
+console.error("Error fetching data:", error);
+if (error.message.includes("HTTP error")) {
+outputArea.innerHTML = `Error fetching data. HTTP error! status: ${error.message.split(":")[1].trim()}`;
+} else {
+outputArea.innerHTML = "Error fetching data. Please try again.";
+}
+});
+};
+</script>
 
-    <style>
-      #container {
-        width: 720px;
-        margin: auto;
-        background-color: aqua;
-        text-align: center;
-      }
-      #output {
-        background-color: bisque;
-      }
-    </style>
-  </body>
+<style>
+#container {
+width: 720px;
+margin: auto;
+background-color: aqua;
+text-align: center;
+}
+#output {
+background-color: bisque;
+}
+</style>
+</body>
 </html>
