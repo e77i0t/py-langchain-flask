@@ -33,7 +33,7 @@ source venv/bin/activate
 
 # Install application dependencies from requirements.txt
 echo "Installing application dependencies from requirements.txt"
-pip install -r requirements.txt
+sudo /var/www/langchain-app/venv/bin/pip install -r requirements.txt
 
 # Update and install Nginx if not already installed
 if ! command -v nginx > /dev/null; then
