@@ -28,4 +28,4 @@ def domain_name_generator(niche):
     except Exception as e:
         err = [{"error": f"An error occurred: {e}"}] 
         print(err)
-        return "ERR"
+        return err
