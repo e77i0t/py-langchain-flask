@@ -1,0 +1,1 @@
+This is a quick demo of getting GitHub Actions to use track a prod branch, to auto-deploy to a running AWS EC2 instance that makes live calls to OpenAI's ChatGPT and pass on the responses to a www page via an nginx proxy 
