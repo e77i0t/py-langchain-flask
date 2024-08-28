@@ -30,12 +30,17 @@
   })
   .then((data) => {
     try {
-      outputArea.innerHTML = "";
-      data.forEach((domain) => {
-        listItem = document.createElement("li");
-        listItem.innerHTML = domain;
-        outputArea.append(listItem);
-      });
+      outputAre  a.innerHTML = "";
+if (Array.isArray(data)) {
+  data.forEach((domain) => {
+    listItem = document.createElement("li");
+    listItem.innerHTML = domain;
+    outputArea.append(listItem);
+  });
+} else {
+  console.error("Error parsing data:", data);
+  outputArea.innerHTML = "Error parsing data. Please try again.";
+}
     } catch (error) {
       console.error("Error parsing data:", error);
       outputArea.innerHTML = "Error parsing data. Please try again.";
