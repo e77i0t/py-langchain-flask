@@ -5,11 +5,13 @@ from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
 
 load_dotenv()
+print(os.environ['OPENAI_API_KEY'])
 
 
 def domain_name_generator(niche):
+    key = os.environ['OPENAI_API_KEY']
     try:
-        llm = OpenAI(openai_api_key= os.environ['OPENAI_API_KEY'])
+        llm = OpenAI(openai_api_key=key)
         output_parser = CommaSeparatedListOutputParser()
         format_instruction = output_parser.get_format_instructions()
 
